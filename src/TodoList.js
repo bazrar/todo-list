@@ -11,15 +11,43 @@ export default class TodoList extends Component {
     };
     this.create = this.create.bind(this);
     this.remove = this.remove.bind(this);
+    this.update = this.update.bind(this);
+    this.toggleCompletion = this.toggleCompletion.bind(this);
   }
 
   create(todo) {
-    console.log(todo);
-    this.setState((st) => ({ todos: [...st.todos, { ...todo, id: uuid() }] }));
+    // console.log(todo);
+    this.setState((st) => ({
+      todos: [...st.todos, { ...todo, id: uuid(), completed: false }],
+    }));
   }
 
   remove(id) {
     this.setState({ todos: this.state.todos.filter((todo) => todo.id !== id) });
+  }
+
+  update(id, updatedTask) {
+    // let todos = [...this.state.todos]
+    // let todo = todos.filter(todo => id === todo.id)
+    // todo[task] = updatedTask;
+    console.log(id, updatedTask);
+    const updatedTodos = this.state.todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, task: updatedTask };
+      }
+      return todo;
+    });
+    this.setState({ todos: updatedTodos });
+  }
+
+  toggleCompletion(id) {
+    const updatedTodos = this.state.todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+    this.setState({ todos: updatedTodos });
   }
   render() {
     let todos = this.state.todos.map((todo) => (
@@ -27,7 +55,10 @@ export default class TodoList extends Component {
         key={todo.id}
         id={todo.id}
         task={todo.task}
+        isCompleted={todo.completed}
+        toggleTodo={this.toggleCompletion}
         removeTodo={this.remove}
+        updateTodo={this.update}
       />
     ));
     return (

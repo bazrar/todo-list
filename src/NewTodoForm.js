@@ -14,7 +14,7 @@ export default class NewTodoForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.createTodo(this.state);
-    this.setState({ task: "" });
+    this.setState({ task: " " });
   }
   render() {
     return (
@@ -25,6 +25,7 @@ export default class NewTodoForm extends Component {
           placeholder="new todo"
           id="task"
           name="task"
+          value={this.state.task}
           onChange={this.handleChange}
         />
         <button onClick={this.handleSubmit}>add todo</button>
