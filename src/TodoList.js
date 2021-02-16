@@ -64,8 +64,8 @@ export default class TodoList extends Component {
     ));
     return (
       <div className="app-contanier">
-        <h1>
-          <span className="styling">todo</span> list
+        <h1 className="flux">
+          <span className="neon">todo</span> list
         </h1>
         <NewTodoForm createTodo={this.create} />
         <ul className="container">{todos}</ul>
