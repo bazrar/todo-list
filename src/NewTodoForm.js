@@ -18,17 +18,20 @@ export default class NewTodoForm extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="task">new todo</label>
+      <form onSubmit={this.handleSubmit} className="input_div">
+        {/* <label htmlFor="task">new todo</label> */}
         <input
+          className="input"
           type="text"
-          placeholder="new todo"
+          placeholder="What do you want to do..."
           id="task"
           name="task"
           value={this.state.task}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleSubmit}>add todo</button>
+        <button className="addButton" onClick={this.handleSubmit}>
+          <i class="fas fa-plus"></i>
+        </button>
       </form>
     );
   }
